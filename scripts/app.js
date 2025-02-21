@@ -27,9 +27,16 @@ const firebaseConfig = {
   measurementId: "G-WLDC66LLS7"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+  // Add Task Function
+  window.addTask = function() {
+    const taskInput = document.getElementById('task-input');
+    const taskText = taskInput.value.trim();
+    if (taskText) {
+      const task = { title: taskText, completed: false };
+      db.collection('tasks').add(task); // Save to Firestore
+      taskInput.value = ''; // Clear input
+    }
+  };
 
 
 // Initialize Firebase
